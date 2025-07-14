@@ -11,3 +11,11 @@ def sign_up(form, db):
     db.commit()
     return {'message': "Ro'yxatdan muvofaqqiyatli o'tdingiz !"}
 
+
+def update_user(form, db, current_user):
+    db.query(Users).filter(Users.id == current_user.id).update({
+        'username': form.username,
+        'password': get_password_hash(form.password)
+    })
+    db.commit()
+    return {'message': 'Profil muvofaqqiyatli tahrirlandi !'}
